@@ -6,7 +6,7 @@ public class TestInt {
     System.out.println(i1.getValue());
 
     MyInteger i2 = new MyInteger(5);
-    i1.addInteger(i2);
+    i1 = i1.addInteger(i2);
     System.out.println(i1.getValue());
 
 

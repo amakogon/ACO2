@@ -1,6 +1,6 @@
 package week1.contactBook;
 
-public class Contact {
+public class Contact implements Comparable<Contact>{
   private String name;
   private String phoneNumber;
   private int age;
@@ -44,5 +44,10 @@ public class Contact {
 
   public void setPhoneNumber(String contactPhoneNumber) {
     phoneNumber = contactPhoneNumber;
+  }
+
+  @Override
+  public int compareTo(Contact contact) {
+    return name.compareTo(contact.name);
   }
 }

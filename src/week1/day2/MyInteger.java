@@ -1,25 +1,21 @@
 package week1.day2;
 
-public class MyInteger {
-  private int value;
+public final class MyInteger implements Comparable<MyInteger> {
+  private final int value;
 
-  public MyInteger(int value){
+  public MyInteger(int value) {
     this.value = value;
   }
 
-  public int getValue(){
+  public int getValue() {
     return value;
   }
 
-  public void setValue(int value){
-    this.value = value;
+  public MyInteger addInteger(MyInteger integer) {
+    return new MyInteger(value + integer.value);
   }
 
-  public void addInteger(MyInteger integer){
-    value = value + integer.value;
-  }
-
-  public boolean isSame(MyInteger integer){
+  public boolean isSame(MyInteger integer) {
 //    if(value == integer.value){
 //      return true;
 //    }
@@ -27,20 +23,20 @@ public class MyInteger {
     return value == integer.value;
   }
 
-  public String asString(){
+  public String asString() {
     return value + "";
   }
 
   public boolean equals(Object obj) {
-    if(obj == null){
+    if (obj == null) {
       return false;
     }
 
-    if(obj == this){
+    if (obj == this) {
       return true;
     }
 
-    if(!(obj instanceof MyInteger)) {
+    if (!(obj instanceof MyInteger)) {
       return false;
     }
 
@@ -48,4 +44,19 @@ public class MyInteger {
     return value == other.value;
   }
 
+  @Override
+  public String toString() {
+    return value + "";
+  }
+
+  @Override
+  public int compareTo(MyInteger integer) {
+//    if (value > integer.value) {
+//      return 1;
+//    } else if (value < integer.value) {
+//      return -1;
+//    }
+//    return 0;
+    return value > integer.value ? 1 : value < integer.value ? -1 : 0;
+  }
 }
