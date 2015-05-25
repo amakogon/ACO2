@@ -1,5 +1,9 @@
 package week3.day2;
 
+import week6.day1.MyEmptyStackException;
+
+import java.util.EmptyStackException;
+
 public class MyStack implements IStack {
 
   private static final int DEFAULT_SIZE = 16;
@@ -24,6 +28,9 @@ public class MyStack implements IStack {
 
   @Override
   public Object pop() {
+    if (size() == 0) {
+      throw new EmptyStackException();
+    }
     Object obj = elements[index - 1];
     elements[--index] = null;
     return obj;
@@ -37,7 +44,7 @@ public class MyStack implements IStack {
   public void someMethod() {
   }
 
-  private void ensureCapacity(){
+  private void ensureCapacity() {
     //check array size
     //create new array
     //copy elemenets into new array
