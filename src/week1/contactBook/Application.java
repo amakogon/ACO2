@@ -1,11 +1,21 @@
 package week1.contactBook;
 
+import week1.contactBook.io.DefaultLoaderImpl;
+import week1.contactBook.io.DefaultSaverImpl;
+import week1.contactBook.io.ILoader;
+import week1.contactBook.io.ISaver;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Application {
+  private static final String APP_FOLDER = "/home/amakogon/contactList/";
+
   public static void main(String[] args) {
     ContactList contactList = new ContactList();
     addTestData(contactList);
+//    TODO: add serialization
     Scanner scanner = new Scanner(System.in);
 
     while (true) {
@@ -51,6 +61,27 @@ public class Application {
       case 8:
         contactList.showSortedContacts();
         break;
+      case 9:
+        System.out.println("enter file path");
+        String savePath = scanner.next();
+        ISaver saver = new DefaultSaverImpl();
+        try {
+          File file = new File(APP_FOLDER + savePath);
+          saver.save(contactList, file);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        break;
+      case 10:
+        ILoader loader = new DefaultLoaderImpl();
+        System.out.println("enter file path");
+        String loadPath = scanner.next();
+        try {
+          loader.load(contactList, new File(APP_FOLDER + loadPath));
+        } catch (IOException e) {
+          System.out.println(e.getMessage());
+        }
+        break;
       default:
         break;
     }
@@ -66,6 +97,9 @@ public class Application {
     System.out.println("6. Show contacts by operator");
     System.out.println("7. Remove last contact");
     System.out.println("8. Show sorted contacts");
+    System.out.println("9. Export contacts");
+    System.out.println("10. Import contacts");
+//    TODO: exit
   }
 
   public static Contact createContact() {
@@ -79,12 +113,12 @@ public class Application {
     return new Contact(name, phoneNumber);
   }
 
-  public static void addTestData(ContactList contactList) {
-    contactList.addContact(new Contact("Artem", "0932104231"));
-    contactList.addContact(new Contact("Oleg", "0635431233"));
-    contactList.addContact(new Contact("Igor", "0932105635"));
-    contactList.addContact(new Contact("Anna", "0631534123"));
-    contactList.addContact(new Contact("Petia", "0675434849"));
+  private static void addTestData(ContactList contactList) {
+//    contactList.addContact(new Contact("Artem", "0932104231"));
+//    contactList.addContact(new Contact("Oleg", "0635431233"));
+//    contactList.addContact(new Contact("Igor", "0932105635"));
+//    contactList.addContact(new Contact("Anna", "0631534123"));
+//    contactList.addContact(new Contact("Petia", "0675434849"));
     contactList.addContact(new Contact("Victor", "0679732143"));
   }
 }

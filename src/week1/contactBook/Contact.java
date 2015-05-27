@@ -1,32 +1,51 @@
 package week1.contactBook;
 
-public class Contact implements Comparable<Contact>{
+import week2.day1.Developer;
+
+import java.io.Serializable;
+
+public class Contact implements Comparable<Contact>, Serializable {
   private String name;
   private String phoneNumber;
+  private transient Developer dev = new Developer("s", 2);
   private int age;
 
-  public Contact(){
+  public Contact() {
 //    System.out.println("in constructor");
   }
 
-  public Contact(String contactName, String contactPhoneNumber){
+  public Contact(String contactName, String contactPhoneNumber) {
     name = contactName;
     phoneNumber = contactPhoneNumber;
   }
 
-  public void printInfo(){
+  public void printInfo() {
     System.out.println("Name = " + name
                          + ", phone = " + phoneNumber
                          + ",age = " + age);
   }
 
-  public void setAge(int contactAge){
-    if(contactAge > 0) {
+  public void setAge(int contactAge) {
+    if (contactAge > 0) {
       age = contactAge;
     }
   }
 
-  public int getAge(){
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Contact contact = (Contact) o;
+    return name.equals(contact.name) && phoneNumber.equals(contact.phoneNumber);
+  }
+
+  @Override
+  public String toString() {
+    return String.format("Name=%s, phone=%s", name, phoneNumber);
+  }
+
+  public int getAge() {
     return age;
   }
 

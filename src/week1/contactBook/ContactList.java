@@ -14,7 +14,7 @@ public class ContactList {
 
   public void showContacts() {
     for (int i = 0; i < index; i++) {
-      contacts[i].printInfo();
+      System.out.println(contacts[i]);
     }
   }
 
@@ -69,5 +69,18 @@ public class ContactList {
       }
     }
     showContacts();
+  }
+
+  public Contact[] getContacts() {
+    return contacts;
+  }
+
+  public boolean contains(Contact contact) {
+    for (int i = 0; i < size(); i++) {
+      if (contacts[i].equals(contact)) {
+        return true;
+      }
+    }
+    return false;
   }
 }
