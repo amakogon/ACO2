@@ -19,7 +19,11 @@ public class ContactList {
   }
 
   public void removeLastContact() {
-    index--;
+    if(index == 0){
+      System.err.println("contact list is already empty@");
+    } else {
+      index--;
+    }
   }
 
   public Contact find(String contactName) {
@@ -72,7 +76,9 @@ public class ContactList {
   }
 
   public Contact[] getContacts() {
-    return contacts;
+    Contact[] realContacts = new Contact[size()];
+    System.arraycopy(contacts, 0, realContacts, 0, size());
+    return realContacts;
   }
 
   public boolean contains(Contact contact) {
